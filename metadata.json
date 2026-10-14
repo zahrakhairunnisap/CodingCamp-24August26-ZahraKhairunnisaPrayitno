@@ -1,0 +1,8 @@
+{
+  "name": "To-Do List Life Dashboard",
+  "description": "A personal productivity dashboard with real-time clock, greeting, focus timer, to-do list, and quick links.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

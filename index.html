@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List Life Dashboard</title>
+    <meta name="description" content="A personal productivity dashboard with real-time clock, greeting, focus timer, to-do list, and quick links." />
+    <meta property="og:title" content="To-Do List Life Dashboard" />
+    <meta property="og:description" content="A personal productivity dashboard with real-time clock, greeting, focus timer, to-do list, and quick links." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Single CSS file inside css/ as required by folder rules (relative path for GitHub Pages) -->
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Top Navigation Bar -->
+      <header class="top-nav">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">⚡</span>
+          <span>Life Dashboard</span>
+        </div>
+        <div class="nav-actions">
+          <button id="btn-open-name-modal" class="nav-btn" title="Customize greeting name">
+            <span>👋</span>
+            <span id="top-user-name">Alex</span>
+          </button>
+          <button id="theme-toggle-btn" class="nav-btn" title="Toggle Light/Dark Theme">
+            <span id="theme-icon">🌙</span>
+            <span id="theme-text">Dark</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Section 1: Hero Greeting & Real-Time Clock -->
+      <section class="card hero-card" aria-label="Current time and greeting">
+        <div id="live-clock" class="time-display" title="Click to toggle 12h / 24h format">10:45:22</div>
+        <div id="live-date" class="date-display">Tuesday, January 27, 2026</div>
+        <div class="greeting-row">
+          <span id="greeting-prefix" class="greeting-text">Good Morning</span>
+          <span id="custom-name-wrapper" class="custom-name-wrapper greeting-text" title="Click to change your name">
+            <span id="greeting-name">, Alex</span>
+            <span class="edit-icon" aria-hidden="true">✏️</span>
+          </span>
+        </div>
+        <p class="motivational-quote">"Focus on being productive instead of busy."</p>
+      </section>
+
+      <!-- Section 2: Two-column Dashboard Grid (Focus Timer + Tasks) -->
+      <div class="dashboard-grid">
+        <!-- Focus Timer Card -->
+        <section class="card focus-timer-card" aria-label="Focus Timer">
+          <div class="card-header">
+            <h2 class="card-title">
+              <span>⏱️</span> Focus Timer
+            </h2>
+            <button id="btn-custom-timer" class="preset-btn" title="Set custom pomodoro time">⚙️ Custom</button>
+          </div>
+
+          <div class="timer-container">
+            <!-- Preset Duration Buttons (Challenge: Change Pomodoro Time) -->
+            <div class="timer-presets" aria-label="Timer presets">
+              <button class="preset-btn" data-mins="15">15 min</button>
+              <button class="preset-btn active" data-mins="25">25 min</button>
+              <button class="preset-btn" data-mins="45">45 min</button>
+              <button class="preset-btn" data-mins="50">50 min</button>
+            </div>
+
+            <!-- Big Digital Countdown Display -->
+            <div class="timer-display-box">
+              <div id="timer-display" class="timer-digits">25:00</div>
+              <div id="timer-status" class="timer-status">Ready to Focus</div>
+              <div class="timer-progress-track">
+                <div id="timer-progress-bar" class="timer-progress-bar"></div>
+              </div>
+            </div>
+
+            <!-- Timer Action Buttons -->
+            <div class="timer-controls">
+              <button id="btn-timer-start" class="btn btn-primary" aria-label="Start timer">Start</button>
+              <button id="btn-timer-stop" class="btn btn-warning" aria-label="Stop or pause timer">Stop</button>
+              <button id="btn-timer-reset" class="btn btn-secondary" aria-label="Reset timer">Reset</button>
+            </div>
+
+            <!-- Meta statistics -->
+            <div class="timer-meta">
+              <span>🍅 Today:</span>
+              <span id="completed-sessions-count" style="font-weight: 600; color: var(--text-primary);">0 sessions</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tasks Card -->
+        <section class="card tasks-card" aria-label="To-Do Tasks">
+          <div class="card-header">
+            <h2 class="card-title">
+              <span>📝</span> Tasks
+            </h2>
+            <span id="task-count-badge" class="badge">0 left</span>
+          </div>
+
+          <!-- Controls: Filters & Sorting (Challenge: Sort Tasks) -->
+          <div class="task-controls-bar">
+            <div class="task-filters" role="group" aria-label="Task filters">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="active">Active</button>
+              <button class="filter-btn" data-filter="completed">Done</button>
+            </div>
+
+            <div class="sort-select-wrapper">
+              <label for="task-sort-select">Sort:</label>
+              <select id="task-sort-select" class="sort-select">
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="alphabetical">A to Z</option>
+                <option value="incomplete-first">Incomplete First</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Add Task Form -->
+          <form id="task-form" class="task-form">
+            <input
+              type="text"
+              id="task-input"
+              class="input-field"
+              placeholder="Add a new task..."
+              autocomplete="off"
+              required
+            />
+            <button type="submit" class="btn btn-primary">Add</button>
+          </form>
+
+          <!-- Prevent Duplicate Tasks Warning (Challenge) -->
+          <div id="duplicate-alert" class="duplicate-alert" role="alert">
+            <span>⚠️</span>
+            <span>Task already exists in your list! Duplicate avoided.</span>
+          </div>
+
+          <!-- Task Items List -->
+          <ul id="task-list" class="task-list" aria-label="List of tasks">
+            <!-- Dynamically populated by js/app.js -->
+          </ul>
+        </section>
+      </div>
+
+      <!-- Section 3: Quick Links Card -->
+      <section class="card quick-links-card" aria-label="Quick Links">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span>🚀</span> Quick Links
+          </h2>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Saved locally</span>
+        </div>
+
+        <!-- Add Link Form -->
+        <form id="link-form" class="link-form">
+          <input
+            type="text"
+            id="link-name-input"
+            class="input-field"
+            placeholder="Link name (e.g. Google)"
+            autocomplete="off"
+            required
+          />
+          <input
+            type="text"
+            id="link-url-input"
+            class="input-field"
+            placeholder="URL (e.g. google.com or https://...)"
+            autocomplete="off"
+            required
+          />
+          <button type="submit" class="btn btn-primary">Add Link</button>
+        </form>
+
+        <!-- Quick Links Container -->
+        <div id="quick-links-container" class="links-grid" aria-label="Saved quick link shortcuts">
+          <!-- Dynamically populated by js/app.js -->
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="dashboard-footer">
+        <p>To-Do List Life Dashboard &middot; Client-Side Local Storage &middot; Standalone Web App</p>
+      </footer>
+    </div>
+
+    <!-- Modal: Custom Greeting Name (Challenge: Custom name in greeting) -->
+    <div id="name-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-name-title">
+      <div class="modal-content">
+        <div class="modal-header" id="modal-name-title">What should we call you?</div>
+        <div class="modal-body">
+          <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            Your name will be displayed in the daily greeting and saved to your browser.
+          </p>
+          <input
+            type="text"
+            id="name-input"
+            class="input-field"
+            style="width: 100%;"
+            placeholder="Enter your name"
+            maxlength="30"
+          />
+        </div>
+        <div class="modal-footer">
+          <button id="btn-cancel-name" class="btn btn-secondary">Cancel</button>
+          <button id="btn-save-name" class="btn btn-primary">Save Name</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Custom Pomodoro Time (Challenge: Change Pomodoro time) -->
+    <div id="timer-custom-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-timer-title">
+      <div class="modal-content">
+        <div class="modal-header" id="modal-timer-title">Custom Focus Duration</div>
+        <div class="modal-body">
+          <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            Set your desired focus session length in minutes (1 - 180 min):
+          </p>
+          <input
+            type="number"
+            id="custom-timer-input"
+            class="input-field"
+            style="width: 100%;"
+            min="1"
+            max="180"
+            value="25"
+          />
+        </div>
+        <div class="modal-footer">
+          <button id="btn-cancel-custom-timer" class="btn btn-secondary">Cancel</button>
+          <button id="btn-save-custom-timer" class="btn btn-primary">Set Timer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Non-intrusive Toast Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <!-- Single JavaScript file inside js/ as required by folder rules (relative path for GitHub Pages) -->
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
