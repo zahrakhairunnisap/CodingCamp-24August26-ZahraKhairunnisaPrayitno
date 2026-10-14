@@ -1,0 +1,47 @@
+{
+  "projectName": "To-Do List Life Dashboard",
+  "version": "1.0.0",
+  "constraints": {
+    "TC-1": "HTML for structure, CSS for styling, Vanilla JavaScript (no frameworks), No backend server",
+    "TC-2": "Browser Local Storage API only",
+    "TC-3": "Modern browser compatibility (Chrome, Firefox, Edge, Safari)"
+  },
+  "folderRules": {
+    "css": "css/style.css",
+    "javascript": "js/app.js",
+    "html": "index.html"
+  },
+  "features": {
+    "greeting": {
+      "clock": true,
+      "date": true,
+      "greetingTimeOfDay": true,
+      "customName": true
+    },
+    "focusTimer": {
+      "pomodoro": true,
+      "startStopReset": true,
+      "presets": [15, 25, 45, 50],
+      "customDuration": true,
+      "audioChime": true
+    },
+    "todoList": {
+      "add": true,
+      "edit": true,
+      "toggleDone": true,
+      "delete": true,
+      "preventDuplicates": true,
+      "sort": ["newest", "oldest", "alphabetical", "incomplete-first"],
+      "filter": ["all", "active", "completed"]
+    },
+    "quickLinks": {
+      "add": true,
+      "delete": true,
+      "externalNewTab": true,
+      "persisted": true
+    },
+    "theme": {
+      "lightDarkMode": true
+    }
+  }
+}
